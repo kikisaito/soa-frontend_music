@@ -43,7 +43,7 @@ export default function MusicSearch() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch(`http://localhost:4000/api/music/search?q=${searchQuery}&page=${pageNumber}`);
+      const res = await fetch(`https://soa-backend-music.onrender.com/api/music/search?q=${searchQuery}&page=${pageNumber}`);
       if (!res.ok) throw new Error('Error en el servidor');
       const data = await res.json();
       setTracks(data || []);
@@ -73,7 +73,7 @@ export default function MusicSearch() {
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch('http://localhost:4000/api/music/favorites');
+      const res = await fetch('https://soa-backend-music.onrender.com/api/music/favorites');
       if (!res.ok) throw new Error('Error al cargar favoritas');
       const data = await res.json();
       setSavedTracks(data || []);
@@ -86,7 +86,7 @@ export default function MusicSearch() {
 
   const handleSave = async (track: Track) => {
     try {
-      const res = await fetch('http://localhost:4000/api/music/favorites', {
+      const res = await fetch('https://soa-backend-music.onrender.com/api/music/favorites', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
