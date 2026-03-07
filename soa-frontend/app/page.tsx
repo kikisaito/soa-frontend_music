@@ -25,7 +25,8 @@ export default function MusicSearch() {
   const [selectedTrack, setSelectedTrack] = useState<Track | null>(null);
   const [toast, setToast] = useState<string | null>(null);
 
-  // EFECTO: Cerrar modal con la tecla ESC
+
+//modalfeo
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setSelectedTrack(null);
@@ -39,6 +40,16 @@ export default function MusicSearch() {
     setTimeout(() => setToast(null), 3000);
   };
 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ ///
   const fetchSearchResults = async (searchQuery: string, pageNumber: number) => {
     setLoading(true);
     setError(null);
@@ -53,6 +64,12 @@ export default function MusicSearch() {
       setLoading(false);
     }
   };
+
+
+
+
+
+
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -69,6 +86,11 @@ export default function MusicSearch() {
     fetchSearchResults(query, newPage);
   };
 
+
+
+
+
+
   const fetchSavedTracks = async () => {
     setLoading(true);
     setError(null);
@@ -84,6 +106,12 @@ export default function MusicSearch() {
     }
   };
 
+
+
+
+
+
+///
   const handleSave = async (track: Track) => {
     try {
       const res = await fetch('https://soa-backend-music.onrender.com/api/music/favorites', {
@@ -93,7 +121,7 @@ export default function MusicSearch() {
           trackId: String(track.trackId),
           title: track.trackName || track.title,
           artist: track.artistName || track.artist,
-          albumCover: track.artworkUrl100?.replace('100x100', '300x300') || track.albumCover
+          albumCover: track.artworkUrl100?.replace('100x100', '300x300') || track.albumCover //la prtada pero mas grand
         }),
       });
       if (!res.ok) throw new Error('Error al guardar');
@@ -104,14 +132,27 @@ export default function MusicSearch() {
     }
   };
 
+
+
+
+
+
+
+  
+  
+  
   useEffect(() => {
     if (currentView === 'saved') fetchSavedTracks();
   }, [currentView]);
 
+
+
+
+  
+
   return (
     <main className="min-h-screen bg-black text-zinc-300 font-sans selection:bg-emerald-900 selection:text-emerald-100 relative overflow-x-hidden">
       
-      {/* Navegacion Superior */}
       <nav className="border-b border-zinc-900 bg-zinc-950/50 backdrop-blur-md sticky top-0 z-40 px-8 py-4 flex justify-center gap-12">
         <button 
           onClick={() => { setCurrentView('search'); setTracks([]); setQuery(''); }}
